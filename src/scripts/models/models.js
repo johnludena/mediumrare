@@ -2,7 +2,15 @@ import Backbone from 'backbone'
 import $ from 'jquery'
 import {APP_NAME} from '../app'
 
-export const UserModel = Backbone.Model.extend({
+export const PostsCollection =  Backbone.Collection.extend({
+	url: '/api/posts'
+})
+
+export const PostModel = Backbone.Model.extend({
+	url: '/api/posts'
+})
+
+export const UserModel = {
 	register: function(email,password) {
 		return $.ajax({
 			type: 'post',
@@ -31,4 +39,4 @@ export const UserModel = Backbone.Model.extend({
 	getCurrentUser: function() {
 		return JSON.parse(localStorage[APP_NAME])
 	}
-})
+}

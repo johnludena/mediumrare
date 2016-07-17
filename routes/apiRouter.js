@@ -11,6 +11,7 @@ apiRouter
   .get('/posts', function(req, res){
     Post.find(req.query, function(err, results){
       if(err) return res.json(err) 
+      console.log('want to GET posts?')
       res.json(results)
     })
   })
@@ -18,7 +19,10 @@ apiRouter
   .post('/posts', function(req, res){
     let newPost = new Post(req.body)
     newPost.save(function(err){
-      if(err) return res.json(err) 
+      if(err) {
+        console.log('whoops! there was an error...')
+        return res.json(err) 
+      } 
  
       res.json(newPost)
     })
