@@ -2,6 +2,21 @@ import Backbone from 'backbone'
 import $ from 'jquery'
 import {app_name} from '../app'
 
+
+export const PostModel = Backbone.Model.extend({
+    url: "/api/posts",
+    // warning: behind-the-scenes magic
+    // when you sync with the server, read the ._id property
+    // off the returned record, and assign it into your .id
+    // property
+    idAttribute: "_id"
+})
+
+export const PostCollection = Backbone.Collection.extend({
+    model: PostModel,
+    url: "/api/posts"
+})
+
 // ..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x
 const User = Backbone.Model.extend({
 	urlRoot: '/api/users',

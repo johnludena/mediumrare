@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import LoginPage from './LoginPage'
 import $ from 'jquery'
 import Backbone from 'backbone'
-import {PostsCollection} from './models/models'
 import {AllPostsView} from './AllPostsView'
 import LoginRegisterView from './LoginRegisterView'
 import DashboardView from './DashboardView'
 import ComposeView from './ComposeView'
+import {PostsCollection} from './models/models'
+import {User} from './models/models'
 import init from './init'
 
 
@@ -52,6 +52,19 @@ const app = function() {
 		},
 
 		initialize: function() {
+			this.on("route",(rtHandler)=> {
+				console.log(User.getCurrentUser())
+				if (!User.getCurrentUser()) {
+					location.hash = "login"
+				}
+				else {
+					if (rtHandler.toLowerCase().includes('login')) {
+						location.hash = "dashboard"
+					}
+					window.rh = rtHandler				
+				}
+			})
+
 			Backbone.history.start()
 		}
 
@@ -60,8 +73,6 @@ const app = function() {
 	new AppRouter()
 }
 
-// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..
 // NECESSARY FOR USER FUNCTIONALITY. DO NOT CHANGE. 
 export const app_name = init()
 app()
-// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..

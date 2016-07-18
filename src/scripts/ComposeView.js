@@ -12,18 +12,18 @@ const ComposeView = React.createClass({
 
 		console.log('title and body entered:',title, body)
 
-		var newPost = new PostModel({
-			title: title,
-			body: body,
-			user: {
-				email: User.getCurrentUser().email,
-				_id: User.getCurrentUser()._id
-			}
-		})
+		// var newPost = new PostModel({
+		// 	title: title,
+		// 	body: body,
+		// 	user: {
+		// 		email: User.getCurrentUser().email,
+		// 		_id: User.getCurrentUser()._id
+		// 	}
+		// })
 
-		console.log('newPost object:',newPost)
+		// console.log('newPost object:',newPost)
 
-		newPost.save()
+		// newPost.save()
 		
 	},
 
