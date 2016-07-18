@@ -8,7 +8,7 @@ authRouter
   .post('/register', function(req, res){
     // passport appends to request
     let newUser = new User(req.body)
-    console.log(req.body)
+    console.log('new user registration request body:', req.body)
 
     User.findOne({email: req.body.email}, function(err, record){
 

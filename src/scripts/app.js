@@ -8,6 +8,7 @@ import {AllPostsView} from './AllPostsView'
 import LoginRegisterView from './LoginRegisterView'
 import DashboardView from './DashboardView'
 import ComposeView from './ComposeView'
+import init from './init'
 
 
 export const APP_NAME = 'blogplatform'
@@ -47,7 +48,7 @@ const app = function() {
 		},
 
 		redirectHome: function() {
-			location.hash = 'dashboard'
+			location.hash = 'login'
 		},
 
 		initialize: function() {
@@ -59,4 +60,8 @@ const app = function() {
 	new AppRouter()
 }
 
+// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..
+// NECESSARY FOR USER FUNCTIONALITY. DO NOT CHANGE. 
+export const app_name = init()
 app()
+// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..

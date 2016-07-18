@@ -9,6 +9,8 @@ const LoginRegisterView = React.createClass({
 		var password = e.currentTarget.password.value
 
 		ACTIONS.logUserIn(email,password)
+
+		console.log('user logged in:', email, password)
 	},
 
 	_handleRegisterSubmit: function(e){
@@ -17,6 +19,8 @@ const LoginRegisterView = React.createClass({
 		var password = e.currentTarget.password.value
 
 		ACTIONS.registerUser(email,password)
+
+		console.log('user registered...')
 	
 	},
 

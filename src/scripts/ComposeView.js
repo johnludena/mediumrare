@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavBar} from './NavBar'
 import {PostModel} from './models/models'
-import {UserModel} from './models/models'
+import {User} from './models/models'
 
 const ComposeView = React.createClass({
 	
@@ -10,15 +10,18 @@ const ComposeView = React.createClass({
 		var title = e.currentTarget.title.value
 		var body = e.currentTarget.body.value
 
+		console.log('title and body entered:',title, body)
 
 		var newPost = new PostModel({
 			title: title,
 			body: body,
 			user: {
-				email: UserModel.getCurrentUser().email,
-				_id: UserModel.getCurrentUser()._id
+				email: User.getCurrentUser().email,
+				_id: User.getCurrentUser()._id
 			}
 		})
+
+		console.log('newPost object:',newPost)
 
 		newPost.save()
 		
@@ -26,7 +29,7 @@ const ComposeView = React.createClass({
 
 	render: function() {
 
-		console.log('current user: ', UserModel.getCurrentUser())
+		console.log('current user: ', User.getCurrentUser())
 
 		return (
 				<div className="login-register-container">
