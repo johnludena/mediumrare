@@ -34,18 +34,26 @@ authRouter
   })
 
 authRouter
-  .get('/checkAuth', function (req, res) {
+  .get('/checkAuth', function(req,x,next){console.log(req.body)&&next()}, function (req, res) {
     if (req.user) res.json(req.user);
       else res.json({message: "Forbidden: user no longer authenticated"})
   })
-  .post('/login', passport.authenticate('local'),
+  .post('/login', function(req,res,next){console.log('incoming!!', req.body) && next() }, passport.authenticate('local'),
     function(req, res){
-      console.log('logging in', req.user)
-      let userCopy = JSON.parse(JSON.stringify(req.user))
-      userCopy.password = ''
-      res.json(userCopy)
+      console.log('PASSPORT DOING SOMETHING PLEASE ANYTHING....')
+      if (!req.user) {
+        console.log('USER DOESNT EXIST CANT LOGIN')
+        res.json({
+          err: 'user doesnt exist, bruh'
+        })
+      } else {
+        let userCopy = JSON.parse(JSON.stringify(req.user))
+        userCopy.password = ''
+        res.json(userCopy)        
+      }
     }
   )
+
   authRouter
     .get('/logout', function (req, res) {
       if (req.user) {

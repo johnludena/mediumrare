@@ -11,12 +11,12 @@ module.exports = function(UserModel){
   let onLogin = function(inputUser, inputPW, done){
       UserModel.findOne({"email": inputUser}, function(err, results){
         console.log('running onlogin')
-        if(err){  
+        if(err || !results){  
           //will trigger failure callback
           done(null , false, {message: "user no exist"})   
-        } else if(results.password !== inputPW) {
+        } else if(results.password) {
           //will trigger failure callback
-          done(null, false, {message: "Bad Password"} )      
+          done(null, false, {message: "Username and password combination dunt exist"} )      
         } else {
           done(null, results); 
           //calls req.login(results)

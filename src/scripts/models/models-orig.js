@@ -27,12 +27,9 @@ User.register = function(email,password) {
 	return $.ajax({
 		type: 'post',
 		url: '/auth/register',
-		data: JSON.stringify({
+		data: {
 			email: email,
 			password: password
-		}),
-		headers: {
-			"Content-Type": 'application/json'
 		}
 	})
 }
@@ -41,12 +38,9 @@ User.login = function(email,password) {
 	return $.ajax({
 		type: 'post',
 		url: '/auth/login',
-		data: JSON.stringify({
+		data: {
 			email: email,
 			password: password
-		}),
-		headers: {
-			"Content-Type": 'application/json'
 		}
 	}).then((userData) => {
 		console.log('userData?', userData)

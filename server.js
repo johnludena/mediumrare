@@ -1,3 +1,11 @@
+global.PROJECT_NAME = 'blogplatform'
+// x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x..x
+
+if (!global.PROJECT_NAME) { //« set by npm run init-dev »
+	throw new Error('no project name set. did you forget to run "npm run init-dev"?')
+}
+
+
 const bodyParser = require('body-parser');
 const express = require('express');
 const cookieParser = require('cookie-parser');
@@ -37,7 +45,7 @@ app.set('view engine', 'html');
 // =========
 // DATABASE
 // =========
-connectToDB(process.env.npm_config_name)
+connectToDB(global.PROJECT_NAME)
 
 // =========
 // APPLICATION MIDDLEWARE 
@@ -50,7 +58,7 @@ app.use( session({secret: appSecrets.sessionSecret }) );
 app.use( passport.initialize() );
 app.use( passport.session() );
 appAuthentication(User)
-app.use( appMiddleWare.putCookieOnRes )
+// app.use( appMiddleWare.cookifyUser )
 
 // 
 // =========
@@ -64,5 +72,5 @@ app.use( '/api', apiRouter )
 app.use(appMiddleWare.errorHandler);
 
 app.listen(PORT,function() {
-	console.log('\n\n===== listening for requests on port ' + PORT + ' =====\n\n')
+  console.log('\n\n===== listening for requests on port ' + PORT + ' =====\n\n')
 })
